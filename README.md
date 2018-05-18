@@ -1,61 +1,52 @@
 Language Learning
 =================
 
-Tables can look like this:
+Personal learning on various languages. 
 
-size  material      color
-----  ------------  ------------
-9     leather       brown
-10    hemp canvas   natural
-11    glass         transparent
+- [x] Go
+- [x] Rust
+- [ ] Kotlin
+- [ ] Nim
+- [ ] Clojure
+- [ ] Elixir
+- [ ] Haskell
+- [ ] OCaml
 
-Table: Shoes, their sizes, and what they're made of
+Already got lots of experience of C/C++/Scala/Java/Groovy.
 
-(The above is the caption for the table.) Pandoc also supports
-multi-line tables:
+Problem
+====
 
---------  -----------------------
-keyword   text
---------  -----------------------
-red       Sunsets, apples, and
-          other red or reddish
-          things.
+Build simple web page presenting a table of results.
+Table will be built from data sourced by a making a primary HTTP query to another service and then 
+enriching certain columns of each rot by making a secondary HTTP lookup, the data needing to be blended together.
 
-green     Leaves, grass, frogs
-          and other things it's
-          not easy being.
---------  -----------------------
+Points of interest
+=====
 
-A horizontal rule follows.
+Character and Environment
+ - Fluency of code
+ - Verbosity
+ - Complexity
+ - Ease of learning
+ - Online support community
+ - Documentation of the language and libraries
+ - Standard library
+ - Ecosystem libraries
+ - Convenience
+ - Productivity
+ - Safety
+ - Memory management
+ - Debugging capabilities
+ - Build tools
 
-***
-
-Here's a definition list:
-
-apples
-  : Good for making applesauce.
-oranges
-  : Citrus!
-tomatoes
-  : There's no "e" in tomatoe.
-
-Again, text is indented 4 spaces. (Put a blank line between each
-term/definition pair to spread things out more.)
-
-Here's a "line block":
-
-| Line one
-|   Line too
-| Line tree
-
-and images can be specified like so:
-
-![example image](example-image.jpg "An exemplary image")
-
-Inline math equations go in like so: $\omega = d\phi / dt$. Display
-math should get its own line and be put in in double-dollarsigns:
-
-$$I = \int \rho R^{2} dV$$
-
-And note that you can backslash-escape any punctuation characters
-which you wish to be displayed literally, ex.: \`foo\`, \*bar\*, etc.
+Language features: 
+ - Null vs Option
+ - Functional vs imperative
+ - Mutability vs Immutability
+ - Concurrency
+ - Type Inference
+ - Stack vs Heap
+ - Generics
+ - Macros
+ - Dynamic/Reflection
