@@ -10,6 +10,14 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
+class Roots {
+    String person() {return "/person";}
+    String location() {return "/location";}
+
+    String person(String id) { return person() + "/" + id; }
+    String location(String id) { return location() + "/" + id; }
+};
+
 class Person {
     public String id;
     public String selfUrl;
@@ -18,17 +26,17 @@ class Person {
     public String locationUrl;
 
     public static Person make(
-            String root,
+            Roots roots,
             String _id,
             String _name,
             String _location
     ) {
         return new Person() {{
             this.id = _id;
-            this.selfUrl = root + "/person/" + _id;
+            this.selfUrl = roots.person(_id);
             this.name = _name;
             this.location = _location;
-            this.locationUrl = root + "/location/" +_location;
+            this.locationUrl = roots.location(_location);
         }};
     }
 }
@@ -40,21 +48,23 @@ class Location {
     public String country;
 
     public static Location make(
-            String root,
+            Roots roots,
             String _id,
             String _city,
             String _country
     ) {
         return new Location() {{
             this.location = _id;
-            this.selfUrl = root + "/location/" + _id;
+            this.selfUrl = roots.location(_id);
             this.city = _city;
             this.country = _country;
         }};
     }
 }
 
-public class WebServer {
+public class DataService {
+    static String PERSON_ROOT = "PERSON_ROOT";
+    static String LOCATION_ROOT = "PERSON_ROOT";
 
     public static void main(String[] args) throws Exception {
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
@@ -66,14 +76,14 @@ public class WebServer {
         int p = 10;
         int l = 5;
 
-        people = initPerson(root, p, l);
-        locations = initLocation(root, l);
+        Roots roots= new Roots();
+        people = initPerson(roots, p, l);
+        locations = initLocation(roots, l);
 
         server.start();
 
     }
 
-    static String root = "ROOT";
     static Person[] people = new Person[0];
     static Location[] locations = new Location[0];
 
@@ -83,7 +93,7 @@ public class WebServer {
                 "FR"
         };
 
-    private static Person[] initPerson(String root, int p, int l) {
+    private static Person[] initPerson(Roots root, int p, int l) {
         Person[] people = new Person[p];
         for (int id = 0; id < p; id++) {
             people[id] = Person.make(root, "" + id, "person" + id, "" + (id % l));
@@ -91,10 +101,10 @@ public class WebServer {
         return people;
     }
 
-    private static Location[] initLocation(String root, int l) {
+    private static Location[] initLocation(Roots roots, int l) {
         Location[] locations = new Location[l];
         for (int id = 0; id < l; id++) {
-            locations[id] = Location.make(root,"" + id, "city" + id, countries[id % countries.length]);
+            locations[id] = Location.make(roots,"" + id, "city" + id, countries[id % countries.length]);
         }
         return locations;
     }
@@ -181,7 +191,7 @@ public class WebServer {
 
     private static String localise(HttpExchange t, StringWriter response) {
         String thisRoot = "http://" + t.getRequestHeaders().getFirst("host");
-        return response.getBuffer().toString().replaceAll(root, thisRoot);
+        return response.getBuffer().toString().replaceAll(root_placeholder, thisRoot);
     }
 
     public static Map<String, String> getQueryMap(String query)
