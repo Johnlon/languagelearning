@@ -10,16 +10,18 @@ Personal learning on various languages.
 - [ ] Clojure
 - [ ] Elixir
 - [ ] Haskell
-- [ ] OCaml
+- [X] Scala - already well known so will write the source data service in this
 
-Already got lots of experience of C/C++/Scala/Java/Groovy.
+Also already got lots of experience of C/C++/Java/Groovy.
 
 Problem
 ====
 
-Build simple web page presenting a table of results.
+Build simple web page presenting an HTML table of results.
 Table will be built from data sourced by a making a primary HTTP query to another service and then 
-enriching certain columns of each rot by making a secondary HTTP lookup, the data needing to be blended together.
+enriching certain columns of each row by making a secondary HTTP lookup, the data needing to be blended together.
+
+(!) Open each solution directly in its subdirectory.
 
 Points of interest
 =====
