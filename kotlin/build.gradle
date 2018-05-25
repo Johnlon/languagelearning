@@ -22,11 +22,19 @@ jar {
 
 repositories {
     jcenter()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // Required for Kotlin integration
     compile 'org.springframework.boot:spring-boot-starter-web'
-
     testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    compile 'io.arrow-kt:arrow-core:0.7.1'
+    compile 'io.arrow-kt:arrow-syntax:0.7.1'
+    compile 'io.arrow-kt:arrow-typeclasses:0.7.1'
+    compile 'io.arrow-kt:arrow-data:0.7.1'
+    compile 'io.arrow-kt:arrow-instances-core:0.7.1'
+    compile 'io.arrow-kt:arrow-instances-data:0.7.1'
+    //kapt    'io.arrow-kt:arrow-annotations-processor:0.7
 }

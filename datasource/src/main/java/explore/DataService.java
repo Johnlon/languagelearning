@@ -1,3 +1,5 @@
+package explore;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringWriter;
@@ -15,6 +17,7 @@ import com.sun.net.httpserver.HttpServer;
 class Roots {
 
     private static String ROOT_PLACEHOLDER = "ROOT";
+
 
     static String localise(String s, String thisRoot) {
         return s.replaceAll(ROOT_PLACEHOLDER, thisRoot);
@@ -76,7 +79,7 @@ class Location {
 public class DataService {
 
     public static void main(String[] args) throws Exception {
-        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress("0.0.0.0", 8000), 0);
 
         server.createContext(Roots.searchPersonPath(), new SearchPersonHandler());
         server.createContext(Roots.personPath(), new PersonHandler());
