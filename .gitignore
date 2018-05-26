@@ -1,5 +1,8 @@
+**/*.swp
+**/.idea/
 **/.idea/misc.xml
 **/.idea/vcs.xml
 **/*.iml
 **/out/
 **/build/
+**/.gradle/
