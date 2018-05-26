@@ -174,10 +174,9 @@ public class DataService {
             OutputStream os = t.getResponseBody();
 
             try {
-
                 Map<String, String> params = getQueryMap(t.getRequestURI().getQuery());
-                String nameSearch = params.get("name");
-                Person[] responseObject = Stream.of(DataService.people).filter(x-> x.name.contains(nameSearch)).toArray(Person[]::new);
+                String filter = params.get("name");
+                Person[] responseObject = Stream.of(DataService.people).filter(x-> filter == null || x.name.contains(filter)).toArray(Person[]::new);
 
                 StringWriter response = new StringWriter(100);
                 mapper.writeValue(response, responseObject);
@@ -258,8 +257,11 @@ public class DataService {
         for (String param : params)
         {  String [] p=param.split("=");
             String name = p[0];
-            if(p.length>1)  {String value = p[1];
+            if(p.length>1)  {
+                String value = p[1];
                 map.put(name, value);
+            } else {
+                map.put(name, null);
             }
         }
         return map;
