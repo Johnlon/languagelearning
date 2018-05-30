@@ -1,0 +1,66 @@
+//import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
+//import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+//    application
+    id("org.jetbrains.kotlin.jvm") version "1.2.41"
+    id ("com.github.johnrengelman.shadow") version "2.0.4"
+    id("io.spring.dependency-management") version "1.0.5.RELEASE"
+}
+
+// Tweak to be sure to have compiler and dependency versions the same
+//extra["kotlin.version"] = plugins.getPlugin(KotlinPluginWrapper::class.java).kotlinPluginVersion
+
+repositories {
+    mavenCentral()
+    jcenter()
+    //maven { url 'https://jitpack.io' }
+}
+//
+//application {
+//    mainClassName = "functional.ApplicationKt"
+//}
+
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:2.0.2.RELEASE")
+    }
+}
+
+dependencies {
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compile("org.jetbrains.kotlin:kotlin-reflect")
+
+    compile("org.springframework:spring-webflux")
+    compile("org.springframework:spring-test")
+    compile("org.springframework:spring-context") {
+        exclude group:"org.springframework', module: 'spring-aop"
+    }
+    compile("io.projectreactor.ipc:reactor-netty")
+  //  compile("com.samskivert:jmustache")
+
+    compile("org.slf4j:slf4j-api")
+    compile("ch.qos.logback:logback-classic")
+
+    compile group: 'org.jetbrains.kotlinx', name: 'kotlinx-html-jvm', version: '0.6.9'
+
+//    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.5'
+
+
+    compile 'io.arrow-kt:arrow-core:0.7.1'
+    compile 'io.arrow-kt:arrow-syntax:0.7.1'
+    compile 'io.arrow-kt:arrow-typeclasses:0.7.1'
+    compile 'io.arrow-kt:arrow-data:0.7.1'
+    compile 'io.arrow-kt:arrow-instances-core:0.7.1'
+    compile 'io.arrow-kt:arrow-instances-data:0.7.1'
+
+}
