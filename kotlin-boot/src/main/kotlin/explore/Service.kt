@@ -3,7 +3,6 @@ package explore
 import kotlinx.html.*
 import kotlinx.html.stream.createHTML
 import org.springframework.web.client.RestTemplate
-import org.springframework.web.client.getForObject
 import java.net.URLEncoder
 
 
@@ -58,7 +57,7 @@ class Service {
         val encodedName = URLEncoder.encode(name, "UTF-8")
         val s = "http://localhost:8000/search?name=$encodedName"
         println("Fetching Persons: $s")
-        val persons = restTemplate.getForObject<Array<Person>>(s)
+        val persons = restTemplate.getForObject(s, Array<Person>::class.java)
         return persons?: emptyArray()
     }
 
