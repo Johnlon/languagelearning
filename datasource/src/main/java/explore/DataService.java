@@ -157,7 +157,6 @@ public class DataService {
                 System.out.println("EX " + ex);
                 throw ex;
             } finally {
-
                 os.close();
             }
         }
